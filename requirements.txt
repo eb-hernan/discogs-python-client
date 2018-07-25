@@ -1,0 +1,8 @@
+certifi==2018.4.16
+chardet==3.0.4
+discogs-client==2.2.1
+idna==2.7
+oauthlib==2.1.0
+requests==2.19.1
+six==1.11.0
+urllib3==1.23
