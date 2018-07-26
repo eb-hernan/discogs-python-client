@@ -22,3 +22,7 @@ Note: If one missed install it via `brew` or `easy_install` (install global pack
 4. Install the dependencies `pip2 install -r requirements.txt`
 
 5. Deactivate virtual environment once done `deactivate`
+
+## XML Parser
+
+1. Test XML Parser `python xml_main.py artist_test.xml`
