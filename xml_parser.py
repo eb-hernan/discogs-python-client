@@ -5,7 +5,7 @@ from xml_utils import (
     strip_tag_name,
 )
 
-def parser(pathXML):
+def parse_artists(pathXML):
     artist = None
     level = 0
 

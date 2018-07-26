@@ -2,18 +2,23 @@ import sys
 import time
 import os
 
-from utils import (
-    hms_string,
-)
 from xml_parser import (
-    parser,
+    parse_artists,
+)
+from dgs_client import (
+    get_images,
 )
 
+user_token = os.environ.get('DISCOGS_TOKEN')
+
 def main(argv):
-    # validate XML data
     if len(argv) < 1:
         print 'Missing XML file input'
-        print 'xml_main.py <inputfile>'
+        print 'test_client.py <inputfile>'
+        sys.exit(2)
+
+    if not user_token:
+        print 'Missing DISCOGS_TOKEN environment variable'
         sys.exit(2)
 
     start_time = time.time()
@@ -24,9 +29,12 @@ def main(argv):
 
     print('Parsing file {}\n'.format(pathXML))
 
-    for artist in parser(pathXML):
+    for artist in parse_artists(pathXML):
         count_artist += 1
+        artist['images'] = get_images(artist['id'])
+
         print(u'Artist {0}: {1}\n'.format(count_artist, artist))
+
 
     elapsed_time = time.time() - start_time
 

@@ -23,6 +23,17 @@ Note: If one missed install it via `brew` or `easy_install` (install global pack
 
 5. Deactivate virtual environment once done `deactivate`
 
-## XML Parser
+## XML Artist Parser
 
-1. Test XML Parser `python xml_main.py artist_test.xml`
+1. Test XML Parser `python test_xml_artist.py artist_test.xml`
+
+## XML Artist Genre Parser
+
+
+## Getting images with DiscoGS API
+
+1. Create an account at https://www.discogs.com and create a token
+
+2. Add the token in the env variables to be used in the python script `export DISCOGS_TOKEN="YOUR_PRIVATE_TOKEN"`
+
+3. Test `python test_client.py artist_test.xml`
