@@ -55,32 +55,30 @@ def parse_genres(pathXML):
 
             level = calculate_level(event, tname, level, 'release')
 
-            if event == 'start' and tname == 'artists':
-                artists = []
+            if event == 'start':
+                if tname == 'artists':
+                    artists = []
+                elif tname == 'artist':
+                    parsing_artist = True
+                    artist = {'id': None, 'name': None, 'genres': set()}
+                    artists.append(artist)
 
-            if event == 'start' and tname == 'artist':
-                parsing_artist = True
-                artist = {
-                    'id': None,
-                    'name': None,
-                    'genres': set(),
-                }
-                artists.append(artist)
-
+            # we might not wanna include the extraartists here
             if event == 'end' and tname in ('artists', 'extraartists'):
                 parsing_artist = False
 
-            if parsing_artist and tname == 'id' and level == 4:
-                artist['id'] = elem.text
+            if parsing_artist and level == 4:
+                if tname == 'id':
+                    artist['id'] = elem.text
 
-            if parsing_artist and tname == 'name' and level == 4:
-                artist['name'] = elem.text
+                if tname == 'name':
+                    artist['name'] = elem.text
 
+            # update all genre artists
             if event != 'end' and tname == 'genre':
                 for artist in artists:
                     artist['genres'].add(elem.text)
-
-            if event == 'end' and tname == 'release':
+            elif event == 'end' and tname == 'release':
                 yield artists
 
         except etree.ParseError:

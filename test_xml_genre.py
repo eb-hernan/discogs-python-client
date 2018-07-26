@@ -24,8 +24,9 @@ def main(argv):
 
     for artists in parse_genres(pathXML):
         for artist in artists:
-            count_artist += 1
-            print(u'Artist {0}: {1}\n'.format(count_artist, artist))
+            if artist['id']:
+                count_artist += 1
+                print(u'Artist {0}: {1}\n'.format(count_artist, artist))
 
     elapsed_time = time.time() - start_time
 
