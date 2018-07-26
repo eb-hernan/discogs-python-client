@@ -10,6 +10,7 @@ from xml_parser import (
 )
 from dgs_client import (
     get_images,
+    DiscoGSError,
 )
 
 user_token = os.environ.get('DISCOGS_TOKEN')
@@ -34,10 +35,11 @@ def main(argv):
 
     for artist in parse_artists(pathXML):
         count_artist += 1
-        artist['images'] = get_images(artist['id'])
-
-        print(u'Artist {0}: {1}\n'.format(count_artist, artist))
-
+        try:
+            artist['images'] = get_images(artist['id'])
+            print(u'Artist {0}: {1}\n'.format(count_artist, artist))
+        except DiscoGSError:
+            print(u'Cannot get images from Artist {0}: {1}\n'.format(count_artist, artist))
 
     elapsed_time = time.time() - start_time
 
