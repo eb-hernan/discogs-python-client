@@ -4,8 +4,8 @@ def strip_tag_name(t):
         t = t[idx + 1:]
     return t
 
-def calculate_level(event, tname, level):
-    if event == 'start' and tname == 'artist':
+def calculate_level(event, tname, level, node):
+    if event == 'start' and tname == node:
         return 1
     elif event == 'start':
         return level + 1

@@ -29,6 +29,7 @@ Note: If one missed install it via `brew` or `easy_install` (install global pack
 
 ## XML Artist Genre Parser
 
+1. Test XML Parser `python test_xml_genre.py release_test.xml`
 
 ## Getting images with DiscoGS API
 

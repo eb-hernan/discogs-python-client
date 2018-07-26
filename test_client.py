@@ -2,6 +2,9 @@ import sys
 import time
 import os
 
+from utils import (
+    hms_string,
+)
 from xml_parser import (
     parse_artists,
 )
