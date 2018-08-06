@@ -1,4 +1,4 @@
-import xml.etree.ElementTree as etree
+import xml.etree.cElementTree as etree
 
 from xml_utils import (
     calculate_level,
