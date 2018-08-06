@@ -5,6 +5,8 @@ from xml_utils import (
     strip_tag_name,
 )
 
+USE_EXTRA_ARTISTS = False
+
 def parse_artists(pathXML):
     artist = None
     level = 0
@@ -48,6 +50,7 @@ def parse_genres(pathXML):
     artist = {}
     parsing_artist = False
     level = 0
+    artist_tags = ['artists']
 
     for event, elem in etree.iterparse(pathXML, events=('start', 'end')):
         try:
@@ -64,7 +67,10 @@ def parse_genres(pathXML):
                     artists.append(artist)
 
             # we might not wanna include the extraartists here
-            if event == 'end' and tname in ('artists', 'extraartists'):
+            if USE_EXTRA_ARTISTS:
+                artist_tags.append('extraartists')
+
+            if event == 'end' and tname in artist_tags:
                 parsing_artist = False
 
             if parsing_artist and level == 4:
